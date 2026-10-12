@@ -1,19 +1,18 @@
-# Requisições e respostas de APIs com Python
+# Integrações com APIs em Python
 
-Exercícios de integração com Spotify, Deezer e SmartThings usando `requests`.
+Exemplos de requisições HTTP e leitura de respostas de Spotify, Deezer e SmartThings.
 
-## 📁 Arquivos
+## 📌 Funcionalidades
 
-- `main.py`: busca uma música no Spotify e exibe os resultados.
-- `spotify.py`: solicita token com Client Credentials e consulta a busca do Spotify.
-- `deezer.py`: busca músicas no Deezer.
-- `api.py`: lista informações do primeiro dispositivo retornado pelo SmartThings.
-- `config.py`: lê as credenciais de variáveis de ambiente.
-- `aprendizagem/`: exemplos introdutórios; alguns ainda precisam de correções.
+- Busca de músicas no Spotify e Deezer.
+- Consulta de dispositivos no SmartThings.
+- Autenticação com tokens e credenciais de aplicativo.
 
-## 🚀 Preparar e executar
+## Tecnologias
 
-Requisito: Python 3 e credenciais próprias para Spotify e SmartThings.
+Python 3 e requests.
+
+## 🚀 Como executar
 
 ```bash
 git clone https://github.com/daviddevdias/API-Req-e-Res.git
@@ -21,7 +20,7 @@ cd API-Req-e-Res
 python -m venv .venv
 ```
 
-No PowerShell:
+No PowerShell, configure o Spotify:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
@@ -31,26 +30,11 @@ $env:SPOTIFY_CLIENT_SECRET = "seu-client-secret"
 python main.py
 ```
 
-Para o SmartThings:
+Para consultar dispositivos no SmartThings:
 
 ```powershell
 $env:SMARTTHINGS_TOKEN = "seu-token"
 python api.py
 ```
 
-O exemplo Deezer pode ser executado com `python deezer.py`. No Linux ou macOS, ative o ambiente com `source .venv/bin/activate` e configure as variáveis com `export`.
-
-## 🔒 Credenciais e dados
-
-Não grave tokens ou Client Secret no repositório. `.env.example` documenta as variáveis, mas o programa não carrega arquivos .env automaticamente.
-
-O Client ID identifica o aplicativo e não equivale a uma senha; o Client Secret é confidencial. O token SmartThings permite acessar os recursos autorizados pelos seus escopos. Evite publicar nomes e IDs de dispositivos em logs.
-
-Credenciais que já apareceram no GitHub devem ser revogadas e substituídas. Remover valores do código não limpa o histórico nem os arquivos `.pyc` já publicados.
-
-## Limitações
-
-O código depende da disponibilidade das APIs e das permissões da conta. `api.py` assume que há pelo menos um dispositivo. O fluxo Client Credentials do Spotify não autentica um usuário para acessar `/me`.
-
-Os exemplos ainda precisam de tratamento completo de falhas e testes com contas de desenvolvimento.
-
+O exemplo Deezer é executado com `python deezer.py`. As credenciais são lidas do ambiente; arquivos .env não são carregados automaticamente. O acesso depende das permissões da sua conta.
