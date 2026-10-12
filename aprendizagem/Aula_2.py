@@ -1,6 +1,9 @@
+import os
 import requests
 
-TOKEN = "SEUTOKEN"
+TOKEN = os.environ.get("SMARTTHINGS_TOKEN", "")
+if not TOKEN:
+    raise SystemExit("Configure SMARTTHINGS_TOKEN antes de executar.")
 
 
 url = "https://api.smartthings.com/v1"
@@ -10,7 +13,8 @@ headers = {
 }
 
 
-resposta = requests.get(url, headers=headers)
+resposta = requests.get(url, headers=headers, timeout=20)
 
 
-print(headers)
+print("STATUS:", resposta.status_code)
+

@@ -4,13 +4,17 @@ import config
 
 def obter_info():
 
+    if not config.TOKEN:
+        raise SystemExit("Configure SMARTTHINGS_TOKEN antes de executar.")
+
     url = f"{config.API_BASE}/devices"
 
     headers = {
       "Authorization": f"Bearer {config.TOKEN}"
     }
 
-    resposta = requests.get(url, headers=headers)
+    resposta = requests.get(url, headers=headers, timeout=20)
+    resposta.raise_for_status()
     
     dados = resposta.json()
     

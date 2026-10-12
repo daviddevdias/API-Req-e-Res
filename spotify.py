@@ -5,6 +5,9 @@ import config
 
 def pegar_token():
 
+    if not config.CLIENT_ID or not config.CLIENT_SECRET:
+        raise SystemExit("Configure SPOTIFY_CLIENT_ID e SPOTIFY_CLIENT_SECRET.")
+
     auth = f"{config.CLIENT_ID}:{config.CLIENT_SECRET}"
 
     encoded = base64.b64encode(
@@ -19,9 +22,11 @@ def pegar_token():
         },
         data={
             "grant_type": "client_credentials"
-        }
+        },
+        timeout=20
     )
 
+    resposta.raise_for_status()
     return resposta.json()["access_token"]
 
 
@@ -39,10 +44,11 @@ def buscar_musica(nome):
             "q": nome,
             "type": "track",
             "limit": 5
-        }
+        },
+        timeout=20
     )
 
     print("STATUS:", resposta.status_code)
-    print("RESPOSTA:", resposta.text)
+    resposta.raise_for_status()
 
     return resposta.json()
